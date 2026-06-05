@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MOBIUS BRAID | Cosmic Workspace Portal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            mono: ['JetBrains Mono', 'monospace'],
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="min-h-screen text-slate-100 antialiased relative theme-aether transition-all duration-700 font-mono">
+
+  <!-- Celestial Space Background Simulator -->
+  <div class="space-container">
+    <div class="star-layer"></div>
+    <div class="star-layer-slow"></div>
+    <div class="space-orb orb-left"></div>
+    <div class="space-orb orb-right"></div>
+    <div class="space-grid"></div>
+  </div>
+
+  <!-- Cosmic Scanlines Layer -->
+  <div class="fixed inset-0 pointer-events-none z-[100] cyber-grid-overlay opacity-25"></div>
+
+  <!-- Master Interactive Workspace App Frame -->
+  <div class="relative z-10 flex flex-col min-h-screen p-3 md:p-6 max-w-7xl mx-auto gap-6">
+
+    <!-- Top Telemetry Status Header -->
+    <header class="terminal-hud rounded-none p-4 flex flex-col md:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="w-4 h-4 bg-[#00f2fe] luminescent-pulse rounded-none flex items-center justify-center">
+          <div class="w-2 h-2 bg-black"></div>
+        </div>
+        <div>
+          <div class="text-[11px] uppercase tracking-[0.25em] text-slate-400">ARCHITECT DIRECT PORTAL</div>
+          <h1 class="text-lg font-black tracking-widest text-white glow-accent">MOBIUSBRAID.COM // HUB</h1>
+        </div>
+      </div>
+
+      <!-- Real-time Status Readouts -->
+      <div class="flex flex-wrap items-center gap-4 text-[10px] text-slate-400">
+        <div class="border border-slate-800 px-2 py-1 bg-black/40">
+          CORE HARMONIC: <span class="text-[#00f2fe] font-bold">39,420 Hz</span>
+        </div>
+        <div class="border border-slate-800 px-2 py-1 bg-black/40">
+          COHERENCE STATUS: <span class="text-emerald-400 font-bold">94.6% FIXED</span>
+        </div>
+        <div class="border border-slate-800 px-2 py-1 bg-black/40">
+          5iR ENERGETICS: <span class="text-amber-400 font-bold">STABLE (L4)</span>
+        </div>
+      </div>
+
+      <!-- Environment Shifter Control Panel -->
+      <div class="flex items-center gap-1.5 bg-black/80 p-1 border border-slate-800" id="cosmicController">
+        <button data-theme="aether" class="cyber-btn text-[10px] py-1 px-2.5 active" aria-label="Aether Orbit">
+          🌌 AETHER
+        </button>
+        <button data-theme="solaris" class="cyber-btn text-[10px] py-1 px-2.5" aria-label="Mars Nebula">
+          🪐 MARS
+        </button>
+        <button data-theme="andromeda" class="cyber-btn text-[10px] py-1 px-2.5" aria-label="Andromeda Void">
+          💫 ANDROMEDA
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Grid Content Workspace -->
+    <main class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+
+      <!-- Column Left: Profile verification, Apparel matrix, links & wallet -->
+      <div class="lg:col-span-5 flex flex-col gap-6">
+
+        <!-- Master Apparel & Likeness Profile Slot -->
+        <section class="terminal-hud">
+          <div class="terminal-header p-3 flex justify-between items-center">
+            <span class="text-[11px] font-bold uppercase text-white tracking-widest">[SYS_LOOK_04_MATRIX]</span>
+            <span class="text-[9px] text-[#00f2fe] animate-pulse">SYSTEM_ACTIVE</span>
+          </div>
+          <div class="p-4 flex flex-col gap-4">
+            
+            <!-- Dual-Gender Spatial Suit Display Selector -->
+            <div class="flex border-b border-slate-800 pb-3 gap-2 justify-center">
+              <button id="btnMaleMatrix" class="cyber-btn active text-[10px] w-1/2 py-1.5">
+                [MALE_MATRIX]
+              </button>
+              <button id="btnFemaleMatrix" class="cyber-btn text-[10px] w-1/2 py-1.5">
+                [FEMALE_MATRIX]
+              </button>
+            </div>
+
+            <!-- Spatial Suit Specifications Bullet Grid -->
+            <div class="bg-black/60 border border-slate-800 p-3 rounded-none text-xs flex flex-col gap-2.5">
+              <div class="text-[11px] font-bold text-slate-400 tracking-wider uppercase">// SPECIFICATION METADATA:</div>
+              <ul class="flex flex-col gap-1.5 text-slate-300">
+                <li class="mono-bullet">Base Material Weave: <span class="text-white font-medium">Graphene Nanofiber Tactical Lattice</span></li>
+                <li class="mono-bullet">Hardware Integration: <span class="text-white font-medium">Layered Multi-Bag Utility Layouts // High-Stress Harness Fasteners</span></li>
+                <li class="mono-bullet">Thermal Interface Pipeline: <span class="text-white font-medium">Active Cyano-Luminescent piping channel conduits</span></li>
+                <li class="mono-bullet">Energy Leak Constraints: <span class="text-white font-medium">Stabilized boundary flat at dQ_leak/dt = 0.00 Watts</span></li>
+              </ul>
+            </div>
+
+            <!-- Likeness Verification frame -->
+            <div class="border border-[#00f2fe]/20 p-3 bg-slate-950/70 flex flex-col gap-2.5 relative">
+              <div class="text-[10px] text-[#00f2fe] uppercase tracking-widest font-black flex items-center justify-between">
+                <span>[ARCHITECT_LIKENESS_VERIFICATION]</span>
+                <span class="w-2 h-2 bg-emerald-400 rounded-full inline-block animate-ping"></span>
+              </div>
+              
+              <!-- Character visualization ascii sketch mockup -->
+              <div class="text-[9px] text-slate-500 font-mono leading-none bg-black p-2 border border-slate-900 overflow-x-auto select-none">
+     /\==================/\
+    /__\ LIKENESS SHADER /__\
+   |    [ 5iR-VERIFIED ]     |
+   |   Hex Smart Glasses     |
+   |   Navy Tailor Suit      |
+   |   Arms aligned-sides    |
+   |   Wrist plug digital    |
+    \====================/
+              </div>
+
+              <!-- True Profile bullet metadata block -->
+              <ul class="text-[11px] text-slate-300 flex flex-col gap-1">
+                <li class="mono-bullet">Identity Frame: Classic sharp tailored navy suit</li>
+                <li class="mono-bullet">Posture Control: Absolute arms-at-sides alignment</li>
+                <li class="mono-bullet">Sensory Integration: Active hexagonal smart glasses</li>
+                <li class="mono-bullet">Hardware Sync: Wrist-plugged digital watch interface</li>
+              </ul>
+
+              <!-- Interaction Likeness shader test button -->
+              <button id="btnRunLikenessShader" class="cyber-btn cyber-btn-accent w-full text-[10px] mt-2 py-2">
+                RUN LIKENESS CORE SIMULATION
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <!-- Blockwell Cryptographic Ledger Link -->
+        <section class="terminal-hud">
+          <div class="terminal-header p-3 flex justify-between items-center">
+            <span class="text-[11px] font-bold uppercase text-white tracking-widest">[BLOCKWELL_CRYPTO_CORE]</span>
+            <span class="text-[9px] text-[#00f2fe] font-bold">TELEMETRY_ONLINE</span>
+          </div>
+          <div class="p-4 flex flex-col gap-4">
+            
+            <!-- Real-time tracking ledger monitor strip -->
+            <div class="bg-black border border-slate-800 p-3 text-[11px] flex flex-col gap-2 relative">
+              <div class="text-[10px] text-slate-400 uppercase">// $BRAID LEDGER UTILITY TRACKER:</div>
+              <div class="flex justify-between items-center text-white">
+                <span>WALLET EXCHANGE SYSTEM:</span>
+                <span class="text-[#00f2fe] font-bold">SECURED_ACCEL_ARRAYS</span>
+              </div>
+              <div class="flex justify-between items-center text-white">
+                <span>LEDGER PROGRESSION STATE:</span>
+                <span class="text-emerald-400 font-bold" id="telemetryProgress">80.00%</span>
+              </div>
+              
+              <!-- Ledger progress bar -->
+              <div class="w-full bg-slate-900 h-2 border border-slate-800 mt-1 relative overflow-hidden">
+                <div class="bg-[#00f2fe] h-full transition-all duration-1000" style="width: 80%" id="telemetryProgressBar"></div>
+              </div>
+
+              <!-- Stream block telemetry -->
+              <div class="text-[9px] font-mono text-slate-500 max-h-20 overflow-y-auto mt-2 border border-slate-950 p-2 bg-slate-950/50 custom-scrollbar flex flex-col gap-1" id="ledgerTelemetryStream">
+                <div>[02:08:34] Handshaking node: BLOCKWELL_NODE_091x... SECURE</div>
+                <div>[02:08:35] Shunting block matrix validation dQ_leak/dt: 0.00W</div>
+                <div>[02:08:36] Accelerated array consensus status: ACTIVE</div>
+              </div>
+            </div>
+
+            <!-- Stylized Terminal Download shortcut -->
+            <button id="btnMasterBlueprintManual" class="cyber-btn cyber-btn-accent w-full flex items-center justify-center gap-2 text-[11px] py-3 tracking-widest">
+              <span>📂</span> [ACCESS_MASTER_BLUEPRINT_MANUAL_v84.2]
+            </button>
+          </div>
+        </section>
+
+        <!-- Architect Connect Slots Directory -->
+        <section class="terminal-hud">
+          <div class="terminal-header p-3 flex justify-between items-center">
+            <span class="text-[11px] font-bold uppercase text-white tracking-widest">[PORTAL_HYPERLINKS]</span>
+            <span class="text-[9px] text-slate-400">CONNECT_INDEX</span>
+          </div>
+          <div class="p-4 flex flex-col gap-2">
+            <!-- Featured SuperMe.ai Profile -->
+            <a href="https://superme.ai/bzachs" target="_blank" class="cyber-btn flex items-center justify-between text-[11px] p-3 text-[#00f2fe] border-[#00f2fe]/40 bg-[#00f2fe]/5">
+              <span class="flex items-center gap-2">
+                <span>🔥</span> SUPERME DIRECTORY [MOBIUSBRAID]
+              </span>
+              <span class="text-[9px] border border-[#00f2fe] px-1.5 py-0.5">FEATURED_HUB</span>
+            </a>
+            <!-- General links -->
+            <a href="https://medium.com/@mobiusbraid" target="_blank" class="cyber-btn flex items-center gap-2 text-[10px] p-2.5">
+              <span>✍️</span> Medium Editorial Archive
+            </a>
+            <a href="https://github.com/mobiusbraid" target="_blank" class="cyber-btn flex items-center gap-2 text-[10px] p-2.5">
+              <span>👾</span> GitHub Open-Source Repositories
+            </a>
+            <a href="https://x.com/mobiusbraid" target="_blank" class="cyber-btn flex items-center gap-2 text-[10px] p-2.5">
+              <span>🐦</span> X Cybernetic Intel Channel
+            </a>
+          </div>
+        </section>
+
+      </div>
+
+      <!-- Column Right: Ground Transport Hub, CMS / Waitlist, and AI Composer -->
+      <div class="lg:col-span-7 flex flex-col gap-6">
+
+        <!-- Ground Transport Hub: Cydonia Braid Cruiser Shader -->
+        <section class="terminal-hud">
+          <div class="terminal-header p-3 flex justify-between items-center">
+            <span class="text-[11px] font-bold uppercase text-white tracking-widest">[GROUND_TRANSPORT_CYDONIA]</span>
+            <span class="text-[9px] text-[#00f2fe] font-bold">MÖBIUS_BRAID_GEOMETRY</span>
+          </div>
+          <div class="p-4 flex flex-col gap-4">
+            
+            <div class="text-xs text-slate-300 leading-relaxed">
+              Purging all high-entropy combustion elements, the <span class="text-white font-bold">Cydonia Braid Cruiser</span> leverages continuous fluidic topology to achieve frictionless, zero-leak momentum translation.
+            </div>
+
+            <!-- Vehicle shader simulator screen -->
+            <div class="relative bg-black/95 border border-slate-800 p-4 rounded-none flex flex-col md:flex-row gap-4 items-center justify-between">
+              
+              <!-- Stylized schematic visual mockup grid -->
+              <div class="w-full md:w-1/2 bg-slate-950 border border-slate-900 p-3 h-36 flex flex-col items-center justify-center text-center relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-t from-[#00f2fe]/5 to-transparent pointer-events-none"></div>
+                <div class="text-[8px] text-slate-500 font-mono tracking-widest absolute top-1 left-1">CRUISER_GEOMETRY_V2.1</div>
+                
+                <!-- Schematic Line animation -->
+                <div class="w-24 h-12 border-2 border-[#00f2fe]/30 rounded-[50%_50%_0_0] rotate-45 relative animate-pulse">
+                  <div class="absolute inset-0 border border-dashed border-[#00f2fe]/20 rounded-full"></div>
+                  <!-- The Living Eye tracking dot -->
+                  <div class="w-2.5 h-2.5 bg-red-500 rounded-full absolute top-1 left-1/2 -translate-x-1/2 animate-ping" title="Phonon-Polariton tracker"></div>
+                  <div class="w-1.5 h-1.5 bg-[#00f2fe] rounded-full absolute top-1 left-1/2 -translate-x-1/2" title="The Living Eye"></div>
+                </div>
+
+                <div class="text-[10px] text-slate-300 tracking-wider uppercase font-black mt-3">CYDONIA CRUISER</div>
+                <div class="text-[9px] text-emerald-400 font-mono mt-1" id="cruiserStatusText">RESONATING: 39.42 kHz</div>
+              </div>
+
+              <!-- Mechanics list specifications -->
+              <div class="w-full md:w-1/2 flex flex-col gap-2.5 text-xs text-slate-300">
+                <div class="text-[11px] font-bold text-slate-400 tracking-widest uppercase">// CRUI_SER SPECIFICATIONS:</div>
+                <ul class="flex flex-col gap-1.5">
+                  <li class="mono-bullet"><span class="text-white font-semibold">Mechanical Purge:</span> Complete removal of high-entropy combustion elements.</li>
+                  <li class="mono-bullet"><span class="text-white font-semibold">Vector Intake:</span> Seamless fluidic chrome Vortex Manifold with non-associative paths.</li>
+                  <li class="mono-bullet"><span class="text-white font-semibold">Headlight Telemetry:</span> 'The Living Eye' Phonon-Polariton tracker glides with zero friction.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Slider / Configurator parameters panel -->
+            <div class="border border-slate-800 bg-black/40 p-3 flex flex-col gap-3">
+              <div class="text-[10px] text-slate-400 uppercase font-black tracking-wider">// REALTIME COHERENCE TUNER</div>
+              
+              <!-- Parameter 1: Friction Coefficient -->
+              <div class="flex flex-col gap-1">
+                <div class="flex justify-between text-[11px] text-slate-300">
+                  <span>Surface Lattice Friction (μ):</span>
+                  <span class="text-[#00f2fe] font-bold" id="sliderFrictionValue">0.000 μ</span>
+                </div>
+                <input type="range" id="sliderFriction" min="0" max="100" value="0" class="w-full accent-[#00f2fe] bg-slate-900 border border-slate-800 cursor-pointer">
+              </div>
+
+              <!-- Parameter 2: Vortex resonance frequency -->
+              <div class="flex flex-col gap-1">
+                <div class="flex justify-between text-[11px] text-slate-300">
+                  <span>Vortex Resonance Frequency (Hz):</span>
+                  <span class="text-[#00f2fe] font-bold" id="sliderFreqValue">39,420 Hz</span>
+                </div>
+                <input type="range" id="sliderFreq" min="10000" max="60000" value="39420" class="w-full accent-[#00f2fe] bg-slate-900 border border-slate-800 cursor-pointer">
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Selected Logs / Articles downways -->
+        <section class="terminal-hud">
+          <div class="terminal-header p-3 flex justify-between items-center">
+            <span class="text-[11px] font-bold uppercase text-white tracking-widest">[SELECTED_ARCHIVE_LOGS]</span>
+            <span class="text-[9px] text-[#00f2fe] font-bold" id="articlesCount">3 SECURE LOGS</span>
+          </div>
+          <div class="p-4 flex flex-col gap-4">
+            
+            <!-- Article search filter -->
+            <div class="flex gap-2">
+              <input type="text" id="articleSearchInput" placeholder="FILTER ARCHIVE LOGS..." class="cyber-input w-full text-xs placeholder:text-slate-600">
+              <button id="btnSearchArchive" class="cyber-btn text-xs">FILTER</button>
+            </div>
+
+            <!-- Articles container Grid -->
+            <div class="flex flex-col gap-4" id="articlesList">
+              <!-- Loaded dynamically by main.js -->
+            </div>
+          </div>
+        </section>
+
+        <!-- Dynamic Subscriber waitlist and automated webhook config -->
+        <section class="terminal-hud">
+          <div class="terminal-header p-3 flex justify-between items-center">
+            <span class="text-[11px] font-bold uppercase text-white tracking-widest">[BLOCKWELL_WAITLIST_PIPELINE]</span>
+            <span class="text-[9px] text-[#00f2fe] font-bold">5iR_WAITLIST</span>
+          </div>
+          <div class="p-4 flex flex-col gap-4">
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Access premium 5iR architecture schematics, full-length fluid logic deep-dives, and physical suit manufacturing waitlist alignment. Subscribe to receive active data shunts.
+            </p>
+
+            <form id="subscribeForm" class="flex flex-col md:flex-row gap-2">
+              <input type="email" id="subscribeEmail" placeholder="ENTER COHERENT_EMAIL_ADDR..." required class="cyber-input text-xs w-full">
+              <button type="submit" class="cyber-btn cyber-btn-accent text-xs whitespace-nowrap">
+                ALIGN SUBSCRIBER TELEMETRY
+              </button>
+            </form>
+
+            <!-- Webhook alignment controller panel (Advanced status utility) -->
+            <div class="border border-slate-800 bg-black/60 p-3 flex flex-col gap-2.5">
+              <div class="text-[10px] text-slate-400 uppercase tracking-widest font-black flex justify-between items-center">
+                <span>[WEBHOOK_GATEWAY_INTEGRATION]</span>
+                <span class="text-xs text-[#00f2fe]" id="webhookStatusIndicator">DISCONNECTED</span>
+              </div>
+              <p class="text-[10px] text-slate-500">
+                Connect your waitlist subscriptions to external automations (Make, Slack, Formspree, Zapier) in real time.
+              </p>
+              <div class="flex gap-2">
+                <input type="text" id="webhookInputUrl" placeholder="https://api.example.com/webhook" class="cyber-input text-[10px] w-full py-1 px-2.5">
+                <button id="btnSaveWebhook" class="cyber-btn text-[10px] px-3.5 py-1.5">SAVE</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- AI Coherence Engine & Composer Terminal Dashboard -->
+        <section class="terminal-hud">
+          <div class="terminal-header p-3 flex justify-between items-center">
+            <span class="text-[11px] font-bold uppercase text-white tracking-widest">[ARCHITECT_CORE_AI_COHERENCE_ENGINE]</span>
+            <span class="text-[9px] text-emerald-400 font-bold">DEEPSEEK_V4_ONLINE</span>
+          </div>
+          <div class="p-4 flex flex-col gap-4">
+            
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Ask the coherence engine about continuous logic, topological energy matrices, and the 5th Industrial Revolution blueprints.
+            </p>
+
+            <!-- Conversation window -->
+            <div id="aiChatWindow" class="bg-black/90 border border-slate-900 p-3 rounded-none h-48 overflow-y-auto text-xs flex flex-col gap-3 custom-scrollbar">
+              <div class="text-[#00f2fe] font-bold">
+                [COHERENCE_BOT_v1.0] Coherence system initialized. Awaiting programmatic inputs.
+              </div>
+            </div>
+
+            <!-- Input trigger form -->
+            <div class="flex gap-2">
+              <input type="text" id="aiChatInput" placeholder="QUERY COHERENCE ENGINE BLUEPRINTS..." class="cyber-input text-xs w-full">
+              <button id="btnSendAiQuery" class="cyber-btn text-xs whitespace-nowrap">
+                RUN QUERY
+              </button>
+            </div>
+
+            <!-- Live article composer workspace -->
+            <div class="border border-slate-800 bg-black/40 p-3 flex flex-col gap-3">
+              <div class="text-[11px] font-bold text-slate-400 tracking-widest uppercase">// EXPERIMENTAL LOG COMPOSER Workspace</div>
+              <p class="text-[10px] text-slate-500">
+                Use the AI engine to generate and append a brand new 5iR topological log directly to your portfolio!
+              </p>
+              <div class="flex flex-col gap-2">
+                <input type="text" id="aiComposerPrompt" placeholder="Log prompt (e.g. 'Advanced Vector manifold integration on Cydonia')" class="cyber-input text-[10px]">
+                <button id="btnGenerateLog" class="cyber-btn cyber-btn-accent text-[10px] py-2">
+                  ⚡ [AI_COMPOSE_LOG_TO_ARCHIVE]
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+      </div>
+
+    </main>
+
+    <!-- Custom Modal Reader Dialog (Framed Monospace Layout) -->
+    <dialog id="readerDialog" class="bg-black/95 border-2 border-[#00f2fe] text-slate-100 max-w-2xl w-full p-6 font-mono focus:outline-none backdrop:bg-black/80 z-[200]">
+      <div class="flex flex-col gap-4 h-full">
+        <!-- Reader header bar -->
+        <div class="border-b border-slate-800 pb-3 flex justify-between items-start">
+          <div>
+            <span class="text-[10px] text-[#00f2fe] tracking-widest uppercase font-black" id="readerCategory">SCHEMATIC ARTICLE</span>
+            <h2 class="text-lg font-black tracking-wider text-white mt-1" id="readerTitle">LOG COMPILATION STATUS</h2>
+          </div>
+          <button id="btnExitReader" class="cyber-btn text-xs px-2.5 py-1">
+            [ESC_CLOSE]
+          </button>
+        </div>
+
+        <!-- Reader body content -->
+        <div class="text-xs text-slate-300 leading-relaxed overflow-y-auto max-h-[60vh] pr-2 custom-scrollbar" id="readerBody">
+          <!-- Filled by main.js -->
+        </div>
+
+        <!-- Reader dynamic waitlist teaser element (if members article and hasn't unlocked yet) -->
+        <div id="readerLockBlock" class="hidden border border-amber-500/30 bg-amber-950/20 p-4 flex flex-col gap-3 items-center text-center">
+          <div class="text-amber-400 font-bold text-[11px] uppercase tracking-widest">⚠️ MEMBERS-ONLY CORE CRYPTOGRAPHICALLY SECURED</div>
+          <p class="text-[10px] text-slate-400 max-w-md">
+            To unlock the full text of this 5iR architectural log, enter your email below to align your subscriber waitlist telemetry.
+          </p>
+          <form id="readerUnlockForm" class="flex gap-2 w-full max-w-sm">
+            <input type="email" id="readerUnlockEmail" placeholder="ENTER COHERENT_EMAIL..." required class="cyber-input text-[10px] w-full">
+            <button type="submit" class="cyber-btn cyber-btn-accent text-[10px] whitespace-nowrap">ALIGN</button>
+          </form>
+        </div>
+
+        <!-- Reader footer telemetry line -->
+        <div class="border-t border-slate-800 pt-3 flex justify-between text-[9px] text-slate-500">
+          <span>COHERENCE SYSTEM INTEGRATION ENABLED</span>
+          <span id="readerDateStamp">DATE: 2026.06.05</span>
+        </div>
+      </div>
+    </dialog>
+
+    <!-- Global Monospace Notification Block (Toast) -->
+    <div id="cyberToast" class="toast">
+      SYSTEM STATUS: <span id="toastText">COHERENCE ESTABLISHED</span>
+    </div>
+
+    <!-- Architectural Monospace Footer -->
+    <footer class="border-t border-slate-800 mt-12 py-8 text-center text-slate-500 text-xs flex flex-col gap-2">
+      <p class="tracking-widest">
+        © 2026 MOBIUS BRAID // ALL DATA REGISTERED ACROSS CONTINUOUS LOOPS
+      </p>
+      <p class="text-[10px] text-slate-600">
+        Engineered with Absolute Monospace Consistency // Target Site Configuration: https://mobiusbraid.com Portfolio Hub
+      </p>
+    </footer>
+
+  </div>
+
+  <!-- Main Unified Portal Entry Engine -->
+  <script type="module" src="main.js"></script>
+</body>
+</html>
