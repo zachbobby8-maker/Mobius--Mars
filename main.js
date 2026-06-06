@@ -578,7 +578,7 @@ async function executeCoherenceQuery() {
       thinkDiv.remove();
       const responseDiv = document.createElement("div");
       responseDiv.className = "text-white border-l border-[#00f2fe] pl-2 mt-1 leading-relaxed";
-      responseDiv.innerHTML = `<span class="text-[#00f2fe] font-bold">[COHERENCE_STANDALONE]:</span> Portal running in decentralized standalone mode. Core harmonic locked at 39,420 Hz. Live AI query pipelines active when frame is loaded inside the Miniapps AI system workspace.`;
+      responseDiv.innerHTML = `<span class="text-[#00f2fe] font-bold">[COHERENCE_STANDALONE]:</span> Portal running in decentralized standalone mode. Core harmonic locked at 39,420 Hz. Live AI query pipelines active when frame is loaded inside the Vortex AI system workspace.`;
       chatWindow.appendChild(responseDiv);
       chatWindow.scrollTop = chatWindow.scrollHeight;
     }, 1000);
