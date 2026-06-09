@@ -265,6 +265,65 @@
 
             </div>
           </section>
+
+          <!-- PREMIUM LOOKBOOK SHOWCASE STAGE -->
+          <section class="terminal-hud bg-[#050b1a] border border-[#1c2d5a] rounded overflow-hidden">
+            <div class="terminal-header bg-[#02050f] border-b border-[#1c2d5a] px-4 py-2.5 text-[11px] font-bold text-white uppercase tracking-widest border-l-4 border-l-[#00f2fe]">
+              [VAULT_LOOKBOOK] Design Core Assets
+            </div>
+            <div class="p-4 flex flex-col gap-4">
+              <p class="text-xs text-slate-300 leading-relaxed">
+                Vault of registered design patents and core assets engineered for high-status physical integration. Select an archive specimen to inspect technical specifications.
+              </p>
+              
+              <div class="flex flex-col gap-2.5" id="lookbookList">
+                <!-- Clickable lookbook cards -->
+                <button data-look="look_04" class="lookbook-card w-full text-left border border-[#1c2d5a] p-3 rounded bg-black/40 hover:border-[#00f2fe]/50 hover:bg-[#00f2fe]/5 transition-all flex flex-col gap-1 focus:outline-none focus:border-[#00f2fe]">
+                  <div class="text-xs font-bold text-white uppercase tracking-wider flex justify-between items-center w-full">
+                    <span>Look 04 Space Suit Matrix</span>
+                    <span class="text-[8px] border border-[#00f2fe] px-1.5 py-0.5 text-[#00f2fe] uppercase font-mono">SELECTED</span>
+                  </div>
+                  <div class="text-[9px] text-[#5850ec] font-mono uppercase tracking-wider">DIOR / BALENCIAGA CONCEPT</div>
+                </button>
+
+                <button data-look="braid_cruiser" class="lookbook-card w-full text-left border border-[#1c2d5a] p-3 rounded bg-black/40 hover:border-[#00f2fe]/50 hover:bg-[#00f2fe]/5 transition-all flex flex-col gap-1 focus:outline-none focus:border-[#00f2fe]">
+                  <div class="text-xs font-bold text-white uppercase tracking-wider flex justify-between items-center w-full">
+                    <span>The Cydonia Braid Cruiser</span>
+                    <span class="text-[8px] border border-slate-700 px-1 py-0.5 text-slate-500 uppercase font-mono">STANDBY</span>
+                  </div>
+                  <div class="text-[9px] text-[#5850ec] font-mono uppercase tracking-wider">5iR INDUSTRIAL SYSTEMS</div>
+                </button>
+
+                <button data-look="navy_ensemble" class="lookbook-card w-full text-left border border-[#1c2d5a] p-3 rounded bg-black/40 hover:border-[#00f2fe]/50 hover:bg-[#00f2fe]/5 transition-all flex flex-col gap-1 focus:outline-none focus:border-[#00f2fe]">
+                  <div class="text-xs font-bold text-white uppercase tracking-wider flex justify-between items-center w-full">
+                    <span>Sovereign Navy Suit Core</span>
+                    <span class="text-[8px] border border-slate-700 px-1 py-0.5 text-slate-500 uppercase font-mono">STANDBY</span>
+                  </div>
+                  <div class="text-[9px] text-[#5850ec] font-mono uppercase tracking-wider">ARCHITECT CUSTOM EDITION</div>
+                </button>
+              </div>
+
+              <!-- Asset Detail Viewer Terminal (Inspector) -->
+              <div class="bg-black border border-[#1c2d5a] p-4 rounded min-h-[100px] flex flex-col justify-center relative overflow-hidden">
+                <div class="absolute inset-0 bg-gradient-to-t from-emerald-500/5 to-transparent pointer-events-none"></div>
+                
+                <div id="lookbookInspectorEmpty" class="text-center py-4">
+                  <div class="text-[10px] text-slate-400 font-mono tracking-wider uppercase">[SELECT AN ARCHIVE SPECIMEN FOR FULL DESIGN SPECIFICATIONS]</div>
+                </div>
+
+                <div id="lookbookInspectorContent" class="hidden flex flex-col gap-1.5 font-mono">
+                  <div class="flex items-center justify-between border-b border-slate-900 pb-1.5 mb-1.5">
+                    <span class="text-[9px] text-emerald-400 font-bold tracking-widest uppercase">[INSPECTOR_ACTIVE]</span>
+                    <span class="text-[8px] text-slate-500">MÖBIUS_BLUEPRINT_DECRYPTED</span>
+                  </div>
+                  <p class="text-[11px] text-[#9cb3c9] leading-relaxed" id="lookbookInspectorDetails">
+                    <!-- Dynamic details -->
+                  </p>
+                </div>
+              </div>
+
+            </div>
+          </section>
         </div>
 
       </div>
@@ -365,26 +424,43 @@
         <div class="lg:col-span-6 flex flex-col gap-6">
           
           <section class="terminal-hud bg-[#050b1a] border border-[#1c2d5a] rounded overflow-hidden">
-            <div class="terminal-header bg-[#02050f] border-b border-[#1c2d5a] px-4 py-2.5 text-[11px] font-bold text-white uppercase tracking-widest border-l-4 border-l-[#5850ec]">
-              Vortex AI // Copied Stream Relay Core Terminal
+            <div class="terminal-header bg-[#02050f] border-b border-[#1c2d5a] px-4 py-2.5 text-[11px] font-bold text-white uppercase tracking-widest border-l-4 border-l-[#5850ec] flex justify-between items-center">
+              <span>[SECURE_CHANNEL] Phase-Sync Net Residency</span>
+              <span class="text-[9px] text-[#5850ec] font-bold tracking-widest">[PORTAL_ACTIVE]</span>
             </div>
             <div class="p-4 flex flex-col gap-4">
+              <!-- Node session banner info -->
+              <div class="bg-black/40 border border-[#1c2d5a] p-3 text-[10px] flex flex-wrap gap-x-4 gap-y-1 justify-between font-mono">
+                <div>SESSION HANDLE: <span class="text-[#00f2fe] font-bold">Architect_Guest</span></div>
+                <div>NODE ID: <span class="text-[#5850ec] font-bold">PUBLIC_PORTAL_VISITOR</span></div>
+                <div class="flex items-center gap-1.5">
+                  <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block animate-ping"></span>
+                  <span class="text-emerald-400 font-bold uppercase">SECURED</span>
+                </div>
+              </div>
+
               <p class="text-xs text-slate-300 leading-relaxed">
-                This viewport runs the duplicated backend routing channel mapped to our single shared access token. High-frequency queries stream safely behind the server firewall at a continuous 39,420 Hz frequency standard.
+                Connect and broadcast over the secure 5iR Phase-Sync communications array. Exchange telemetry with the system network in real-time.
               </p>
 
-              <!-- Conversation window -->
+              <!-- Conversation window / Chat Terminal -->
               <div id="aiChatWindow" class="bg-black/95 border border-slate-900 p-3 h-52 overflow-y-auto text-xs flex flex-col gap-3 custom-scrollbar font-mono">
-                <div class="text-[#00f2fe] font-bold">
-                  [COHERENCE_BOT_v1.0] Coherence system initialized. Awaiting programmatic inputs.
+                <div class="text-emerald-400 font-bold border-b border-slate-900 pb-1.5">
+                  [SYSTEM] Broadcast residency channel synchronized securely. Node connected.
+                </div>
+                <div class="text-[#9cb3c9]">
+                  <span class="text-[#5850ec] font-bold">[Blockwell_Node]:</span> Initiating global ledger validation loop. Current completion index: 80.00%.
+                </div>
+                <div class="text-[#9cb3c9]">
+                  <span class="text-[#5850ec] font-bold">[Sovereign_Braid]:</span> Alignment validated at 39,420 Hz. Direct communication stream is online and secured behind the 5iR firewall.
                 </div>
               </div>
 
               <!-- Input form -->
               <div class="flex gap-2">
-                <input type="text" id="aiChatInput" placeholder="QUERY COHERENCE ENGINE BLUEPRINTS..." class="cyber-input text-xs w-full bg-black/80 border border-[#1c2d5a] text-[#00f2fe]">
+                <input type="text" id="aiChatInput" placeholder="BROADCAST MESSAGE OVER SECURE CHANNEL..." class="cyber-input text-xs w-full bg-black/80 border border-[#1c2d5a] text-[#00f2fe]">
                 <button id="btnSendAiQuery" class="cyber-btn text-xs whitespace-nowrap px-4 py-2 bg-[#1c2d5a] text-white font-bold hover:bg-[#5850ec] transition-all">
-                  RUN QUERY
+                  SEND
                 </button>
               </div>
 
