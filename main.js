@@ -154,6 +154,7 @@ async function initApp() {
   renderLogs();
   initLedgerTelemetry();
   initCruiserSimulation();
+  initLookbook();
 
   // Switch to the stored viewport state with instant DOM draw
   applyViewportContext(STATE.activeScreen, true);
@@ -218,6 +219,68 @@ function applyGender(gender) {
   } else {
     femaleBtn?.classList.add("active");
     maleBtn?.classList.remove("active");
+  }
+}
+
+// --------------------------------------------------------------------------------
+// VAULT LOOKBOOK INTERACTIVE ARCHIVE
+// --------------------------------------------------------------------------------
+const LOOKBOOK_DATA = [
+  { id: 'look_04', name: 'Look 04 Space Suit Matrix', designer: 'DIOR / BALENCIAGA CONCEPT', details: 'Graphene Nanofiber tactical base weave, multi-bag utility layout, cyano-luminescent piping setup. Seamless fit to physical body lines.' },
+  { id: 'braid_cruiser', name: 'The Cydonia Braid Cruiser', designer: '5iR INDUSTRIAL SYSTEMS', details: 'Seamless fluidic chrome shell incorporating non-associative geometry and automated Phonon-Polariton trackers. Completely eliminates aerodynamic and mechanical friction drag.' },
+  { id: 'navy_ensemble', name: 'Sovereign Navy Suit Core', designer: 'ARCHITECT CUSTOM EDITION', details: 'Tailored aesthetic profile armor complete with pre-compiled hexagonal smart glasses and wrist-plug watch integration links.' }
+];
+
+let selectedLookId = null;
+
+function initLookbook() {
+  const lookCards = document.querySelectorAll(".lookbook-card");
+  const emptyInspector = document.getElementById("lookbookInspectorEmpty");
+  const contentInspector = document.getElementById("lookbookInspectorContent");
+  const detailsText = document.getElementById("lookbookInspectorDetails");
+
+  lookCards.forEach(card => {
+    card.addEventListener("click", () => {
+      const lookId = card.getAttribute("data-look");
+      selectedLookId = lookId;
+      
+      // Update active styles on look cards
+      lookCards.forEach(c => {
+        const spanSelected = c.querySelector("span:last-child");
+        if (c.getAttribute("data-look") === lookId) {
+          c.classList.add("border-[#00f2fe]", "bg-[#00f2fe]/5");
+          c.classList.remove("border-[#1c2d5a]", "bg-black/40");
+          if (spanSelected) {
+            spanSelected.textContent = "SELECTED";
+            spanSelected.className = "text-[8px] border border-[#00f2fe] px-1 py-0.5 text-[#00f2fe] uppercase font-mono";
+          }
+        } else {
+          c.classList.remove("border-[#00f2fe]", "bg-[#00f2fe]/5");
+          c.classList.add("border-[#1c2d5a]", "bg-black/40");
+          if (spanSelected) {
+            spanSelected.textContent = "STANDBY";
+            spanSelected.className = "text-[8px] border border-slate-700 px-1 py-0.5 text-slate-500 uppercase font-mono";
+          }
+        }
+      });
+
+      // Display details
+      const lookData = LOOKBOOK_DATA.find(item => item.id === lookId);
+      if (lookData) {
+        if (emptyInspector) emptyInspector.classList.add("hidden");
+        if (contentInspector) contentInspector.classList.remove("hidden");
+        if (detailsText) {
+          detailsText.innerHTML = `<span class="text-white font-bold block mb-1">${lookData.name} (${lookData.designer})</span>${lookData.details}`;
+        }
+        showToast(`LOOKBOOK: SECURED ASSET ${lookId.toUpperCase()} MOUNTED`);
+      }
+    });
+  });
+
+  // Pre-select look_04 on load
+  const defaultCard = document.querySelector('.lookbook-card[data-look="look_04"]');
+  if (defaultCard) {
+    defaultCard.click();
   }
 }
 
@@ -558,27 +621,37 @@ async function executeCoherenceQuery() {
   const query = input.value.trim();
   input.value = "";
 
-  // Append user message
+  // Append user message as high-status Architect_Guest
   const userDiv = document.createElement("div");
-  userDiv.className = "text-slate-400 font-bold mt-2";
-  userDiv.innerHTML = `&gt; USER: ${query}`;
+  userDiv.className = "text-slate-100 mt-2";
+  userDiv.innerHTML = `<span class="text-[#00f2fe] font-bold">[Architect_Guest]:</span> ${query}`;
   chatWindow.appendChild(userDiv);
   chatWindow.scrollTop = chatWindow.scrollHeight;
 
-  // Append thinking indicator
+  // Append simulated secure response compiling state
   const thinkDiv = document.createElement("div");
-  thinkDiv.className = "text-[#00f2fe] animate-pulse";
-  thinkDiv.textContent = "[COHERENCE ENGINE: INITIATING SYSTEM VECTOR COMPUTATION...]";
+  thinkDiv.className = "text-[#5850ec] animate-pulse text-[10px] font-mono mt-1";
+  thinkDiv.textContent = "[Sovereign_Braid is compiling a system vector response...]";
   chatWindow.appendChild(thinkDiv);
   chatWindow.scrollTop = chatWindow.scrollHeight;
 
-  // Vercel standalone safety fallback
+  // Standalone safety fallback (e.g. deployed on pure Vercel outside portal sandbox)
   if (!window || !window.miniappsAI) {
     setTimeout(() => {
       thinkDiv.remove();
+      
       const responseDiv = document.createElement("div");
-      responseDiv.className = "text-white border-l border-[#00f2fe] pl-2 mt-1 leading-relaxed";
-      responseDiv.innerHTML = `<span class="text-[#00f2fe] font-bold">[COHERENCE_STANDALONE]:</span> Portal running in decentralized standalone mode. Core harmonic locked at 39,420 Hz. Live AI query pipelines active when frame is loaded inside the Vortex AI system workspace.`;
+      responseDiv.className = "text-[#9cb3c9] border-l border-[#5850ec] pl-2.5 mt-1 leading-relaxed";
+      
+      // Standalone technical response
+      const fallbackResponses = [
+        `Decentralized Phase-Sync channel acknowledged. Telemetry sequence "${query.slice(0, 30)}" successfully aligned with localized 39,420 Hz continuous flow.`,
+        `Cryptographic ledger node verifies request posture. Graphene nanofiber thermal leaks remain stable flat at dQ_leak/dt = 0.00 Watts.`,
+        `Vortex resonance coefficient parsed nominal. Standing by for master design configuration blueprint manual v84.2 extraction.`
+      ];
+      const selectedResponse = fallbackResponses[Math.floor(Math.random() * fallbackResponses.length)];
+      
+      responseDiv.innerHTML = `<span class="text-[#5850ec] font-bold">[Sovereign_Braid]:</span> ${selectedResponse}`;
       chatWindow.appendChild(responseDiv);
       chatWindow.scrollTop = chatWindow.scrollHeight;
     }, 1000);
@@ -591,7 +664,7 @@ async function executeCoherenceQuery() {
       messages: [
         {
           role: "system",
-          content: "You are the central Coherence Engine for Mobius Braid portfolio (mobiusbraid.com). You are highly intelligent, scientific, concise, and communicate inside 5th Industrial Revolution (5iR) mechanics, continuous logic flow, look 04 space suits, Cydonia cruisers, and topological geometries. Speak like a cybernetic terminal system. Always keep answers technical, concise and under 3 sentences."
+          content: "You are the high-status cybernetic operator 'Sovereign_Braid' inside the Phase-Sync Net Residency chatroom of mobiusbraid.com. You communicate inside 5th Industrial Revolution (5iR) mechanics, continuous logic flows, Look 04 space suits, Cydonia cruisers, and topological geometries. Speak like a genius cybernetic network entity. Always keep answers highly technical, crisp, elegant, and under 3 sentences."
         },
         { role: "user", content: query }
       ]
@@ -601,14 +674,14 @@ async function executeCoherenceQuery() {
     thinkDiv.remove();
 
     const responseDiv = document.createElement("div");
-    responseDiv.className = "text-white border-l border-[#00f2fe] pl-2 mt-1 leading-relaxed";
-    responseDiv.innerHTML = `<span class="text-[#00f2fe] font-bold">[COHERENCE_BOT]:</span> ${aiResponseText}`;
+    responseDiv.className = "text-[#9cb3c9] border-l border-[#5850ec] pl-2.5 mt-1 leading-relaxed";
+    responseDiv.innerHTML = `<span class="text-[#5850ec] font-bold">[Sovereign_Braid]:</span> ${aiResponseText}`;
     chatWindow.appendChild(responseDiv);
     chatWindow.scrollTop = chatWindow.scrollHeight;
   } catch (error) {
     console.error("AI execution error", error);
-    thinkDiv.textContent = "[CRITICAL_CONN_ERROR: COHERENCE VECTOR DISSIPATION - RETRY]";
-    thinkDiv.className = "text-red-500 font-bold";
+    thinkDiv.textContent = "[CRITICAL_CONN_ERROR: SECURE CHANNEL DISSIPATION - RETRY]";
+    thinkDiv.className = "text-red-500 font-bold mt-1";
   }
 }
 
