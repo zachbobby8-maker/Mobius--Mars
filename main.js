@@ -231,56 +231,146 @@ const LOOKBOOK_DATA = [
   { id: 'navy_ensemble', name: 'Sovereign Navy Suit Core', designer: 'ARCHITECT CUSTOM EDITION', details: 'Tailored aesthetic profile armor complete with pre-compiled hexagonal smart glasses and wrist-plug watch integration links.' }
 ];
 
-let selectedLookId = null;
+const STYLING_RECORDS = [
+  { id: 'LOOK_01', name: 'TOPOLOGICAL STEALTH', tag: 'STREET_TACTICAL', footwear: 'Balenciaga Boots', apparel: 'Modular Tee & Multi-Bag Vest', optics: 'Clear Tech Lens' },
+  { id: 'LOOK_02', name: 'SUPERCONDUCTING FLOW', tag: 'CORPORATE_ARCHITECT', footwear: 'Nike Matte Dress Boots', apparel: 'Navy Nano Suit & Turtleneck', optics: 'Hex Smart Glasses' },
+  { id: 'LOOK_03', name: 'NEW CYDONIA EXCURSION', tag: 'PLANETARY_CORRIDOR', footwear: 'Graphene Space Casings', apparel: 'Fluidic Cyano Suit & Harness', optics: 'Opaque Void Shield' }
+];
+
+let activeLookbookTab = "vault"; // "vault" or "inventory"
+let selectedVaultLookId = "look_04";
+let selectedInventoryLookId = "LOOK_01";
 
 function initLookbook() {
-  const lookCards = document.querySelectorAll(".lookbook-card");
+  const tabController = document.getElementById("lookbookTabController");
+  
+  if (tabController) {
+    tabController.addEventListener("click", (e) => {
+      const btn = e.target.closest("button");
+      if (!btn) return;
+      const tab = btn.getAttribute("data-tab");
+      if (tab) {
+        activeLookbookTab = tab;
+        
+        // Update tab styling
+        tabController.querySelectorAll("button").forEach(b => {
+          if (b.getAttribute("data-tab") === tab) {
+            b.classList.add("active");
+          } else {
+            b.classList.remove("active");
+          }
+        });
+        
+        renderLookbook();
+        showToast(`LOOKBOOK VIEWPORT SHIFTED: ${tab.toUpperCase()}`);
+      }
+    });
+  }
+
+  renderLookbook();
+}
+
+function renderLookbook() {
+  const listContainer = document.getElementById("lookbookList");
   const emptyInspector = document.getElementById("lookbookInspectorEmpty");
   const contentInspector = document.getElementById("lookbookInspectorContent");
   const detailsText = document.getElementById("lookbookInspectorDetails");
 
-  lookCards.forEach(card => {
-    card.addEventListener("click", () => {
-      const lookId = card.getAttribute("data-look");
-      selectedLookId = lookId;
+  if (!listContainer) return;
+  listContainer.innerHTML = "";
+
+  if (activeLookbookTab === "vault") {
+    LOOKBOOK_DATA.forEach(look => {
+      const isSelected = selectedVaultLookId === look.id;
+      const card = document.createElement("button");
+      card.className = `lookbook-card w-full text-left border p-3 rounded transition-all flex flex-col gap-1 focus:outline-none ${
+        isSelected ? "border-[#00f2fe] bg-[#00f2fe]/5" : "border-[#1c2d5a] bg-black/40 hover:border-[#00f2fe]/50 hover:bg-[#00f2fe]/5"
+      }`;
       
-      // Update active styles on look cards
-      lookCards.forEach(c => {
-        const spanSelected = c.querySelector("span:last-child");
-        if (c.getAttribute("data-look") === lookId) {
-          c.classList.add("border-[#00f2fe]", "bg-[#00f2fe]/5");
-          c.classList.remove("border-[#1c2d5a]", "bg-black/40");
-          if (spanSelected) {
-            spanSelected.textContent = "SELECTED";
-            spanSelected.className = "text-[8px] border border-[#00f2fe] px-1 py-0.5 text-[#00f2fe] uppercase font-mono";
-          }
-        } else {
-          c.classList.remove("border-[#00f2fe]", "bg-[#00f2fe]/5");
-          c.classList.add("border-[#1c2d5a]", "bg-black/40");
-          if (spanSelected) {
-            spanSelected.textContent = "STANDBY";
-            spanSelected.className = "text-[8px] border border-slate-700 px-1 py-0.5 text-slate-500 uppercase font-mono";
-          }
-        }
+      card.innerHTML = `
+        <div class="text-xs font-bold text-white uppercase tracking-wider flex justify-between items-center w-full">
+          <span>${look.name}</span>
+          <span class="text-[8px] border ${isSelected ? 'border-[#00f2fe] text-[#00f2fe]' : 'border-slate-700 text-slate-500'} px-1.5 py-0.5 uppercase font-mono">
+            ${isSelected ? 'SELECTED' : 'STANDBY'}
+          </span>
+        </div>
+        <div class="text-[9px] text-[#5850ec] font-mono uppercase tracking-wider">${look.designer}</div>
+      `;
+
+      card.addEventListener("click", () => {
+        selectedVaultLookId = look.id;
+        renderLookbook();
+        showToast(`MEMBER COHERENCE: VAULT SPECIMEN ${look.id.toUpperCase()} ONLINE`);
       });
 
-      // Display details
-      const lookData = LOOKBOOK_DATA.find(item => item.id === lookId);
-      if (lookData) {
-        if (emptyInspector) emptyInspector.classList.add("hidden");
-        if (contentInspector) contentInspector.classList.remove("hidden");
-        if (detailsText) {
-          detailsText.innerHTML = `<span class="text-white font-bold block mb-1">${lookData.name} (${lookData.designer})</span>${lookData.details}`;
-        }
-        showToast(`LOOKBOOK: SECURED ASSET ${lookId.toUpperCase()} MOUNTED`);
-      }
+      listContainer.appendChild(card);
     });
-  });
 
-  // Pre-select look_04 on load
-  const defaultCard = document.querySelector('.lookbook-card[data-look="look_04"]');
-  if (defaultCard) {
-    defaultCard.click();
+    // Render inspector details for selected Vault item
+    const activeLook = LOOKBOOK_DATA.find(item => item.id === selectedVaultLookId);
+    if (activeLook) {
+      if (emptyInspector) emptyInspector.classList.add("hidden");
+      if (contentInspector) contentInspector.classList.remove("hidden");
+      if (detailsText) {
+        detailsText.innerHTML = `
+          <div class="text-[9px] text-emerald-400 font-bold tracking-widest uppercase mb-1.5">[SPECIMEN DEFINITION MODEL]</div>
+          <p class="text-white font-bold text-xs uppercase mb-1.5">${activeLook.name}</p>
+          <p class="text-[10px] text-[#5850ec] font-mono mb-2">// DESIGNER: ${activeLook.designer}</p>
+          <p class="text-[11px] text-[#9cb3c9] leading-relaxed">${activeLook.details}</p>
+        `;
+      }
+    }
+  } else {
+    // Inventory tab (STYLING_RECORDS)
+    STYLING_RECORDS.forEach(record => {
+      const isSelected = selectedInventoryLookId === record.id;
+      const card = document.createElement("button");
+      card.className = `lookbook-card w-full text-left border p-3 rounded transition-all flex flex-col gap-1 focus:outline-none ${
+        isSelected ? "border-[#00f2fe] bg-[#00f2fe]/5" : "border-[#1c2d5a] bg-black/40 hover:border-[#00f2fe]/50 hover:bg-[#00f2fe]/5"
+      }`;
+
+      card.innerHTML = `
+        <div class="text-[9px] text-[#00f2fe] font-bold tracking-widest">[${record.tag}]</div>
+        <div class="text-xs font-bold uppercase tracking-wider flex justify-between items-center w-full mt-1">
+          <span class="${isSelected ? 'text-white' : 'text-slate-400'}">${record.name}</span>
+          <span class="text-[8px] border ${isSelected ? 'border-[#39ff14] text-[#39ff14]' : 'border-slate-700 text-slate-500'} px-1.5 py-0.5 uppercase font-mono">
+            ${isSelected ? 'ACTIVE' : 'STANDBY'}
+          </span>
+        </div>
+      `;
+
+      card.addEventListener("click", () => {
+        selectedInventoryLookId = record.id;
+        renderLookbook();
+        showToast(`STYLING MATRIX: RECORD ${record.id} LOADED`);
+      });
+
+      listContainer.appendChild(card);
+    });
+
+    // Render inspector details for selected Inventory record
+    const activeRecord = STYLING_RECORDS.find(item => item.id === selectedInventoryLookId);
+    if (activeRecord) {
+      if (emptyInspector) emptyInspector.classList.add("hidden");
+      if (contentInspector) contentInspector.classList.remove("hidden");
+      if (detailsText) {
+        detailsText.innerHTML = `
+          <div class="text-[9px] text-[#39ff14] font-bold tracking-widest uppercase mb-1.5 border-b border-slate-900 pb-1.5 flex justify-between">
+            <span>STYLING CONFIGURATION MANIFEST: ${activeRecord.id}</span>
+            <span class="text-slate-500 font-normal">TAG: ${activeRecord.tag}</span>
+          </div>
+          <div class="flex flex-col gap-1.5 text-[11px] font-mono text-slate-300">
+            <div><span class="text-[#00f2fe] font-bold">CORE APPAREL:</span> ${activeRecord.apparel}</div>
+            <div><span class="text-[#00f2fe] font-bold">FOOTWEAR TIER:</span> ${activeRecord.footwear}</div>
+            <div><span class="text-[#00f2fe] font-bold">OPTICS LAYER:</span> ${activeRecord.optics}</div>
+          </div>
+          <div class="mt-3 text-[9px] text-slate-500 border-t border-slate-900/60 pt-2 flex items-center gap-1.5">
+            <span class="w-1.5 h-1.5 bg-[#39ff14] rounded-full inline-block animate-pulse"></span>
+            <span>Image vector assets verified at 39,420 Hz // Zero resistance drift recorded.</span>
+          </div>
+        `;
+      }
+    }
   }
 }
 
@@ -593,6 +683,25 @@ ARCHITECT COHERENCE STATE: 94.6% ACCURATE
 - ARCHITECT DIRECTORY: https://superme.ai/bzachs
 - 5iR NETWORK PROTOCOL: https://5ir.dev/
 - TWITTER / X CHANNEL: https://x.com/topologyflux
+
+--------------------------------------------------------------------------------
+6. ACTIVE STYLING INVENTORY MANIFEST RECORDS
+--------------------------------------------------------------------------------
+- LOOK_01 [STREET_TACTICAL]:
+  * Name: TOPOLOGICAL STEALTH
+  * Apparel: Modular Tee & Multi-Bag Vest
+  * Footwear: Balenciaga Boots
+  * Optics: Clear Tech Lens
+- LOOK_02 [CORPORATE_ARCHITECT]:
+  * Name: SUPERCONDUCTING FLOW
+  * Apparel: Navy Nano Suit & Turtleneck
+  * Footwear: Nike Matte Dress Boots
+  * Optics: Hex Smart Glasses
+- LOOK_03 [PLANETARY_CORRIDOR]:
+  * Name: NEW CYDONIA EXCURSION
+  * Apparel: Fluidic Cyano Suit & Harness
+  * Footwear: Graphene Space Casings
+  * Optics: Opaque Void Shield
 ================================================================================
 [MOBIUS_INTEL_SYSTEM_REFACTOR_COMPLETE_v84.2]`;
 
